@@ -1,0 +1,19 @@
+
+<section>
+<h2>Withdraw</h2>
+<p>Enter amount and your GCash number. Admin will process withdraws manually.</p>
+<input
+  type="number"
+  name="amount"
+  min="500"
+  max="50000"
+  step="1"
+  required
+/>
+<small>Minimum ₱500 • Maximum ₱50,000 per withdrawal</small>
+<form method="post" action="/withdraw">
+<label>Amount (PHP)<input name="amount" type="number" step="1" required /></label>
+<label>GCash number<input name="gcash_number" required /></label>
+<button type="submit">Request Withdraw</button>
+</form>
+</section>

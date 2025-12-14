@@ -1,0 +1,127 @@
+
+<section>
+<h2>Admin Panel</h2>
+<h3>Users</h3>
+<table>
+<tr><th>ID</th><th>Name</th><th>Email</th><th>Balance</th><th>Admin</th></tr>
+<% users.forEach(u=>{ %>
+<tr><td><%= u.id %></td><td><%= u.name %></td><td><%= u.email %></td><td>₱<%= (u.balance||0).toFixed(2) %></td><td><%= u.is_admin ? 'Yes':'No' %></td></tr>
+<% }) %>
+</table>
+<h2>Pending Top-ups</h2>
+
+<table border="1">
+  <tr>
+    <th>User ID</th>
+    <th>Amount</th>
+    <th>GCash Number</th>
+    <th>Reference</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  <% txs.forEach(tx => { %>
+    <% if (tx.type === 'topup' && tx.status === 'pending') { %>
+      <tr>
+        <td><%= tx.user_id %></td>
+        <td>₱<%= tx.amount %></td>
+         <td><%= tx.gcash_number %></td>
+        <td><%= tx.reference %></td> 
+        <td><%= tx.status %></td>
+        <td>
+          <form action="/admin/tx/confirm" method="POST">
+            <input type="hidden" name="id" value="<%= tx.id %>">
+            <button type="submit">Confirm</button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  <% }) %>
+</table>
+
+<h2>Pending Withdraw Requests</h2>
+
+<table border="1">
+  <tr>
+    <th>User ID</th>
+    <th>Amount</th>
+    <th>GCash</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  <% txs.forEach(tx => { %>
+    <% if (tx.type === 'withdraw' && tx.status === 'pending') { %>
+      <tr>
+        <td><%= tx.user_id %></td>
+        <td>₱<%= tx.amount %></td>
+        <td><%= tx.reference %></td>
+        <td><%= tx.status %></td>
+        <td>
+          <form action="/admin/tx/complete" method="POST">
+            <input type="hidden" name="id" value="<%= tx.id %>">
+            <button type="submit">Approve & Pay</button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  <% }) %>
+</table>
+
+<h3>Transactions</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>GCash Number</th> <!-- New -->
+      <th>Reference</th>
+      <th>Created At</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% txs.forEach(tx => { %>
+      <tr>
+        <td><%= tx.id %></td>
+        <td><%= tx.user_id %></td>
+        <td><%= tx.type %></td>
+        <td>₱<%= tx.amount %></td>
+        <td><%= tx.status %></td>
+        <td><%= tx.gcash_number %></td> <!-- display number -->
+        <td><%= tx.reference %></td>
+        <td><%= new Date(tx.created_at).toLocaleString() %></td>
+        <td>
+          <% if (tx.type === 'topup' && tx.status === 'pending') { %>
+            <form method="post" action="/admin/tx/confirm">
+              <input type="hidden" name="id" value="<%= tx.id %>">
+              <button type="submit">Confirm</button>
+            </form>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+<form action="/admin/livestream/start" method="POST" style="display:inline;">
+    <button>Start Livestream</button>
+</form>
+<form action="/admin/livestream/stop" method="POST" style="display:inline;">
+    <button>Stop Livestream</button>
+</form>
+
+
+<h3>Bets</h3>
+<table>
+<tr><th>ID</th><th>User</th><th>Numbers</th><th>Amount</th><th>Status</th></tr>
+<% bets.forEach(b=>{ %>
+<tr><td><%= b.id %></td><td><%= b.user_id %></td><td><%= b.numbers %></td><td>₱<%= b.amount %></td><td><%= b.status %></td></tr>
+<% }) %>
+</table>
+
+
+<p><a href="/admin/result">Enter Saturday Result</a></p>
+</section>

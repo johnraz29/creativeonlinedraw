@@ -1,0 +1,82 @@
+<section>
+  <link rel="stylesheet" href="/dashboard.css" />
+  <h2>Dashboard</h2>
+  <p>Hello, <%= user.name %> — Balance: ₱<%= (user.balance || 0).toFixed(2) %></p>
+
+<div id="jackpot" class="dashboard-card">
+  <h3>Jackpot Prize</h3>
+  <center>
+    <p id="jackpot-amount">₱20,000.00</p>
+    <small>+10% of daily earnings</small>
+  </center>
+</div>
+
+<script>
+async function fetchJackpot() {
+  try {
+    const response = await fetch('/api/jackpot');
+    const data = await response.json();
+
+    document.getElementById('jackpot-amount').innerText =
+      `₱${Number(data.jackpot).toLocaleString('en-PH', {
+        minimumFractionDigits: 2
+      })}`;
+  } catch (err) {
+    console.error('Jackpot fetch failed', err);
+  }
+}
+
+fetchJackpot();
+</script>
+
+ <h3>Your Bets</h3>
+
+<table>
+<tr><th>#</th><th>Numbers</th><th>Amount</th><th>Status</th><th>When</th></tr>
+<% if (bets && bets.length) { bets.forEach(b => { %>
+<tr>
+  <td><%= b.id %></td>
+  <td><%= b.numbers %></td>
+  <td>₱<%= b.amount %></td>
+  <td><%= b.status %></td>
+  <td><%= b.created_at %></td>
+</tr>
+<% }) } else { %>
+<tr><td colspan="5">No bets yet</td></tr>
+<% } %>
+
+</table>
+ <form action="/livestream" method="get"><button>Live Draw</button></form>
+  <h3>Your Transactions</h3>
+  <table border="1" cellpadding="5" cellspacing="0">
+   
+    <tr>
+      <th>#</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Reference</th>
+      <th>Date</th>
+    </tr>
+    <% if (txs && txs.length > 0) { %>
+      <% txs.forEach((t, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= t.type %></td>
+          <td>₱<%= parseFloat(t.amount).toFixed(2) %></td>
+          <td><%= t.status %></td>
+          <td><%= t.reference || '-' %></td>
+          <td><%= new Date(t.created_at).toLocaleString('en-PH', { timeZone: 'Asia/Manila' }) %></td>
+        </tr>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="6">No transactions yet</td>
+      </tr>
+    <% } %>
+  </table>
+
+  
+
+
+</section>

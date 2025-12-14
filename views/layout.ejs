@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Creative Online Draw</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<header>
+<h1><a href="/">Creative Online Draw</a></h1>
+<nav>
+<% if (user) { %>
+<a href="/dashboard">Dashboard</a>
+<a href="/bet">Place Bet</a>
+<a href="/topup">Top-up</a>
+<a href="/withdraw">Withdraw</a>
+<% if (user.is_admin) { %> <a href="/admin">Admin</a> <% } %>
+<a href="/logout">Logout</a>
+<% } else { %>
+<a href="/login">Login</a>
+<a href="/register">Register</a>
+<% } %>
+</nav>
+</header>
+<main>
+<% if (messages && messages.error) { %>
+<div class="flash error"><%= messages.error %></div>
+<% } %>
+<% if (messages && messages.success) { %>
+<div class="flash success"><%= messages.success %></div>
+<% } %>
+<%- body %>
+</main>
+<footer>
+<small>Demo app - customize before production. Timezone checks use Asia/Manila.</small>
+</footer>
+</body>
+</html>

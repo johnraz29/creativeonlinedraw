@@ -1,0 +1,116 @@
+/* General body styling */
+body {
+  background: url('/images.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Overlay to make text readable */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* semi-transparent dark overlay */
+  z-index: -1;
+}
+
+/* Flash messages */
+.flash {
+  padding: 12px 20px;
+  margin: 15px auto;
+  max-width: 800px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.flash-success {
+  background-color: rgba(76, 175, 80, 0.9);
+}
+
+.flash-error {
+  background-color: rgba(244, 67, 54, 0.9);
+}
+
+/* Tables */
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: rgba(0,0,0,0.5);
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #fff;
+  text-align: center;
+}
+
+th {
+  background-color: rgba(22, 36, 71, 0.8);
+}
+
+/* Forms */
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 10px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="password"],
+form input[type="email"],
+form button,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+}
+
+form button {
+  background-color: #e94560;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #d32f2f;
+}
+
+/* Headings */
+h1, h2, h3 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Links */
+a {
+  color: #ffd369;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  table, form {
+    width: 95%;
+  }
+}

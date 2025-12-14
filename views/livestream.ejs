@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Draw Stream</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .stream-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            margin-top: 20px;
+        }
+        iframe {
+            width: 80%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        .live-numbers {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-buttons">
+        <form action="/dashboard" method="get"><button>Dashboard</button></form>
+        <form action="/bet" method="get"><button>Place Bet</button></form>
+        <form action="/topup" method="get"><button>Top-up</button></form>
+        <form action="/withdraw" method="get"><button>Withdraw</button></form>
+    </div>
+
+    <section>
+        <h2>Live Draw Stream</h2>
+        <p>Hello, <%= user.name %>. Watch the draw live below:</p>
+
+        <div class="stream-container">
+<% if (livestream === 'on') { %>
+    <iframe src="https://www.youtube.com/watch?v=fu9yk7gCTbc&list=RDDGOVZ2crYnE&index=13" allowfullscreen></iframe>
+<% } else { %>
+    <p style="text-align:center; font-size:1.5em;">Stream not started yet.</p>
+<% } %>
+</div>
+
+        <div class="live-numbers" id="liveNumbers">
+            Waiting for draw results...
+        </div>
+    </section>
+
+    <script>
+        async function fetchDraw() {
+            try {
+                const res = await fetch('/api/latest-draw');
+                const data = await res.json();
+                const el = document.getElementById('liveNumbers');
+                if (data.success) {
+                    el.textContent = 'Winning Numbers: ' + data.numbers.join(', ');
+                } else {
+                    el.textContent = 'Waiting for draw results...';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Fetch every 5 seconds
+        fetchDraw();
+        setInterval(fetchDraw, 5000);
+    </script>
+</body>
+</html>

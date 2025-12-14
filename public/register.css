@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #1e1e2f; /* dark background */
+    color: #f0f0f0;
+    min-height: 100vh;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #2c2c3e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #44445e;
+}
+
+/* Section/Form Container */
+section {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #2a2a3c;
+    border-radius: 10px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    text-align: left;
+    color: #f0f0f0;
+}
+
+form input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #1e1e2f;
+    color: #f0f0f0;
+    margin-top: 5px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #ffd700;
+}
+
+/* Submit Button */
+form button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffd700;
+    color: #1e1e2f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #e6c200;
+    transform: scale(1.05);
+}
+
+/* Links inside the form (optional) */
+form a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    section {
+        margin: 30px 20px;
+        padding: 20px;
+    }
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

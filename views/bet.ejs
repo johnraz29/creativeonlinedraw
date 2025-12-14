@@ -1,0 +1,27 @@
+<section>
+  <link rel="stylesheet" href="/bet.css" />
+  <h2>Place Your Bet</h2>
+  
+  <% if (messages.error) { %>
+    <div style="color:red;"><%= messages.error %></div>
+  <% } %>
+  <% if (messages.success) { %>
+    <div style="color:green;"><%= messages.success %></div>
+  <% } %>
+
+  <form action="/bet" method="POST">
+    <div>
+      <label><p>Select 6 numbers from 1 to 50. Each bet costs ₱20.</p>
+<p>Win prizes if your numbers match the draw!</p></label><br>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+      <input type="number" name="numbers[]" min="1" max="50" required>
+    </div>
+
+    <br>
+    <button type="submit">Place Bet (₱20)</button>
+  </form>
+</section>
